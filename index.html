@@ -93,7 +93,6 @@
           assert.ok($('td#cellMails')[0].innerHTML.indexOf((contenu.mails()[0]) != -1));
           assert.ok($('td#cellMails')[0].innerHTML.indexOf((contenu.mails()[1]) != -1));
           assert.ok(contenu.tags()[0] === $('td#cellTags')[0].innerHTML);
-          debugger;
       });
 
       QUnit.test("remove contact tests", function (assert) {
@@ -110,9 +109,14 @@
       });
 
       QUnit.test("sort contact tests", function (assert) {
-          $("#button_sort").click();
           var itera = Contact.Contacts.instance().iterator();
           var contenu = itera.next();
+          var name = contenu.firstName();
+          var lastName = contenu.lastName();
+          $("#button_sort").click();
+          var sort = Contact.Contacts.instance().sort();
+          assert.ok(contenu.firstName() !== sort[0].firstName());
+          assert.ok(contenu.lastName() !== sort[0].lastName());
       });
     </script>
     <!-- END - Les tests -->
