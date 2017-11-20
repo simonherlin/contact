@@ -64,7 +64,12 @@
     <!-- BEGIN - Les tests -->
     <script>
       QUnit.test("header tests", function (assert) {
-        assert.ok(false);
+          assert.ok($('#cellFirstName').text() === "First name");
+          assert.ok($('#cellLastName').text() === "Last name");
+          assert.ok($('#cellPhones').text() === "Phones");
+          assert.ok($('#cellMails').text() === "Mails");
+          assert.ok($('#cellTags').text() === "Tags");
+          assert.ok($('#cellActions').text() === "Actions");
       });
 
       QUnit.test("list tests", function (assert) {
