@@ -73,19 +73,46 @@
       });
 
       QUnit.test("list tests", function (assert) {
-        assert.ok(false);
+          var itera = Contact.Contacts.instance().iterator();
+          var i = 0;
+          while(itera.hasNext()){
+              var contenu = itera.next();
+              assert.ok(contenu.firstName() === $('td#cellFirstName')[i].innerHTML);
+              assert.ok(contenu.lastName() === $('td#cellLastName')[i].innerHTML);
+              i++;
+          }
       });
 
       QUnit.test("first entry tests", function (assert) {
-        assert.ok(false);
+          var itera = Contact.Contacts.instance().iterator();
+          var contenu = itera.next();
+          assert.ok(contenu.firstName() === $('td#cellFirstName')[0].innerHTML);
+          assert.ok(contenu.lastName() === $('td#cellLastName')[0].innerHTML);
+          assert.ok($('td#cellPhones')[0].innerHTML.indexOf((contenu.phones()[0].number()) != -1));
+          assert.ok($('td#cellPhones')[0].innerHTML.indexOf((contenu.phones()[1].number()) != -1));
+          assert.ok($('td#cellMails')[0].innerHTML.indexOf((contenu.mails()[0]) != -1));
+          assert.ok($('td#cellMails')[0].innerHTML.indexOf((contenu.mails()[1]) != -1));
+          assert.ok(contenu.tags()[0] === $('td#cellTags')[0].innerHTML);
+          debugger;
       });
 
       QUnit.test("remove contact tests", function (assert) {
-        assert.ok(false);
+          var itera = Contact.Contacts.instance().iterator();
+          var contenu = itera.next();
+          var button = "button_"+ contenu.id();
+          var name = contenu.firstName();
+          var last = contenu.lastName();
+          $("#"+button).click();
+          itera = Contact.Contacts.instance().iterator();
+          contenu = itera.next();
+          assert.ok(contenu.firstName() !== name);
+          assert.ok(contenu.lastName() !== last);
       });
 
       QUnit.test("sort contact tests", function (assert) {
-        assert.ok(false);
+          $("#button_sort").click();
+          var itera = Contact.Contacts.instance().iterator();
+          var contenu = itera.next();
       });
     </script>
     <!-- END - Les tests -->
